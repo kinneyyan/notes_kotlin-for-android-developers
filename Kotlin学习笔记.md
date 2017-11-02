@@ -40,17 +40,16 @@ fun toast(message: String, length: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, length).show()
 }
 ```
-> **String模版**（类似shell中的 $+变量名）
-> ```kotlin
+*String模版（类似shell中的 $+变量名）*
+```kotlin
 var name = "kinney"
 "Your name is $name"
 //如果表达式有一点复杂，可以使用一对大括号括起来
 "Your name is ${user.name}"
 ```
+*对象实例化的区别*
 
-> **对象实例化的区别**
-
-> Java | Kotlin
+Java | Kotlin
 ------- | -------
 `Person person = new Person("kinney", "yan")` | var person = Person("kinney", "yan")
 
@@ -177,14 +176,14 @@ for ((key, value) in map) {
     Log.d("map", "key:$key, value:$value")
 }
 ```
-> **Companion objects**
+*Companion objects*
 > Kotlin允许我们去定义一些行为与静态对象一样的对象。尽管这些对象可以用众所周知的模式来实现，比如容易实现的单例模式。
 我们需要一个类里面有一些静态的属性、常量或者函数，我们可以使用companion objecvt。这个对象被这个类的所有对象所共享，就像Java中的静态属性或者方法。
 
-> **with函数**
+*with函数*
 > with是一个非常有用的函数，它包含在Kotlin的标准库中。它接收一个对象和一个扩展函数作为它的参数，然后使这个对象扩展这个函数。这表示所有我们在括号中编写的代码都是作为对象（第一个参数）的一个扩展函数，我们可以就像作为this一样使用所有它的public方法和属性。当我们针对同一个对象做很多操作的时候这个非常有利于简化代码。
-> ```kotlin
-> with(list[position]) {
+```kotlin
+with(list[position]) {
     holder.textView.text = "$date - $description - $high/$low"
     //date、description都是list取出的对象的属性
 }

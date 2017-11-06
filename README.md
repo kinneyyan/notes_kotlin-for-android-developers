@@ -17,6 +17,6 @@
 
     [6.可见性修饰符](https://github.com/kinneyyan/notes_kotlin-for-android-developers/blob/master/notes/6.可见性修饰符.md)
 
-    [Kotlin in Android.md](https://github.com/kinneyyan/notes_kotlin-for-android-developers/blob/master/notes/Kotlin in Android.md)
+    [Kotlin in Android](https://github.com/kinneyyan/notes_kotlin-for-android-developers/blob/master/notes/Kotlin%20in%20Android.md)
 
 

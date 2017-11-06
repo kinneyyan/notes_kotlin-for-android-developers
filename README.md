@@ -15,4 +15,8 @@
     
     [5.Lambdas](https://github.com/kinneyyan/notes_kotlin-for-android-developers/blob/master/notes/5.Lambdas.md)
 
+    [6.可见性修饰符](https://github.com/kinneyyan/notes_kotlin-for-android-developers/blob/master/notes/6.可见性修饰符.md)
+
+    [Kotlin in Android.md](https://github.com/kinneyyan/notes_kotlin-for-android-developers/blob/master/notes/Kotlin in Android.md)
+
 

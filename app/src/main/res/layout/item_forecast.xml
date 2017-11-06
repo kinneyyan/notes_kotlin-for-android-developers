@@ -23,14 +23,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/dateTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             tools:text="May 14, 2015" />
 
         <TextView
-            android:id="@+id/description"
+            android:id="@+id/descriptionTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
@@ -44,14 +44,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/maxTemperature"
+            android:id="@+id/maxTemperatureTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             tools:text="30" />
 
         <TextView
-            android:id="@+id/minTemperature"
+            android:id="@+id/minTemperatureTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"

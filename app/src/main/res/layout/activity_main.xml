@@ -7,19 +7,19 @@
     tools:context="com.kingars.kotlindemo.MainActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/forecast_list"
+        android:id="@+id/forecastListRv"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <Button
-        android:id="@+id/request_btn"
+        android:id="@+id/requestBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:text="request" />
 
     <ProgressBar
-        android:id="@+id/progress_bar"
+        android:id="@+id/progressBar"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="center"

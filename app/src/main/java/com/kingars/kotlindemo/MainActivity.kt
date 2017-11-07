@@ -40,8 +40,8 @@ class MainActivity : AppCompatActivity() {
                 val result = RequestForecastCommand("94043").execute()
                 //如果调用者activity已被销毁，则uiThread内不会执行
                 uiThread {
-                    //forecastList.adapter = ForecastListAdapter(result, { forecast -> toast(forecast.date) })
                     //如果这个函数只接收一个参数，那我们可以使用it引用，而不用去指定左边的参数
+                    //forecastList.adapter = ForecastListAdapter(result, { forecast -> toast(forecast.date) })
                     forecastListRv.adapter = ForecastListAdapter(result, { toast(it.date) })
                     progressBar.visibility = View.GONE
                 }

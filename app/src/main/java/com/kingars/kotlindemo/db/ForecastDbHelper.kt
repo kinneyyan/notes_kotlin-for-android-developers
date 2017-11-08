@@ -30,7 +30,7 @@ object DayForecastTable {
 }
 
 //给构造函数的参数提供一个默认值
-class ForecastDbHelper(ctx: Context = App.instance) : ManagedSQLiteOpenHelper(ctx, DB_NAME, null, DB_VERSION) {
+class ForecastDbHelper private constructor(ctx: Context = App.instance) : ManagedSQLiteOpenHelper(ctx, DB_NAME, null, DB_VERSION) {
     companion object {
         val DB_NAME = "forecast.db"
         val DB_VERSION = 1

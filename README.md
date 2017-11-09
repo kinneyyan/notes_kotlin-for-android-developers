@@ -20,6 +20,8 @@
     [7.委托属性](https://github.com/kinneyyan/notes_kotlin-for-android-developers/blob/master/notes/7.委托属性.md)
     
     [8.集合和函数操作符](https://github.com/kinneyyan/notes_kotlin-for-android-developers/blob/master/notes/8.集合和函数操作符.md)
+    
+    [9.Kotlin中的null安全](https://github.com/kinneyyan/notes_kotlin-for-android-developers/blob/master/notes/9.Kotlin中的null安全.md)
 
     [Kotlin in Android](https://github.com/kinneyyan/notes_kotlin-for-android-developers/blob/master/notes/Kotlin%20in%20Android.md)
 

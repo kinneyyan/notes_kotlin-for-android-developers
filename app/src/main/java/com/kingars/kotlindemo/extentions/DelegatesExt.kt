@@ -1,4 +1,4 @@
-package com.kingars.kotlindemo
+package com.kingars.kotlindemo.extentions
 
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty

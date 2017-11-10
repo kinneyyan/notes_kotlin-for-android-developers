@@ -1,4 +1,4 @@
-package com.kingars.kotlindemo.db
+package com.kingars.kotlindemo.model.db
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -11,24 +11,6 @@ import org.jetbrains.anko.db.*
  * email: shi.yan@ele.me
  * date: 2017/11/7
  */
-object CityForecastTable {
-    val NAME = "CityForecast"
-    val ID = "_id"
-    val CITY = "city"
-    val COUNTRY = "country"
-}
-
-object DayForecastTable {
-    val NAME = "DayForecast"
-    val ID = "_id"
-    val DATE = "date"
-    val DESCRIPTION = "description"
-    val HIGH = "high"
-    val LOW = "low"
-    val ICON_URL = "iconUrl"
-    val CITY_ID = "cityId"
-}
-
 //给构造函数的参数提供一个默认值
 class ForecastDbHelper private constructor(ctx: Context = App.instance) : ManagedSQLiteOpenHelper(ctx, DB_NAME, null, DB_VERSION) {
     companion object {

@@ -1,50 +1,56 @@
-package com.kingars.kotlindemo.db
+package com.kingars.kotlindemo.model.db
 
 import android.database.sqlite.SQLiteDatabase
-import com.kingars.kotlindemo.domain.ForecastList
+import com.kingars.kotlindemo.model.datasource.ForecastDataSource
+import com.kingars.kotlindemo.entity.ForecastList
 import org.jetbrains.anko.db.MapRowParser
 import org.jetbrains.anko.db.SelectQueryBuilder
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 
 /**
- *
- * author: YanShi
- * email: shi.yan@ele.me
- * date: 2017/11/9
+ * 天气数据获取。数据源：db
  */
-class ForecastDb(val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.instance,
-                 val dataMapper: DbDataMapper = DbDataMapper()) {
+class ForecastDb(
+        private val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.instance,
+        private val dataMapper: DbDataMapper = DbDataMapper()) : ForecastDataSource {
 
     /**
-     * 根据城市id查询
+     * 根据zipCode查询
      */
-    fun requestForecastByZipCode(zipCode: Long, date: Long): ForecastList? = forecastDbHelper.use {
-        val dailyRequest = "${DayForecastTable.CITY_ID} = ? AND " + "${DayForecastTable.DATE} >= ?"
+    override fun requestForecastByZipCode(zipCode: Long, date: Long) = forecastDbHelper.use {
+
+        val dailyRequest = "${DayForecastTable.CITY_ID} = ? AND ${DayForecastTable.DATE} >= ?"
         val dailyForecast = select(DayForecastTable.NAME)
                 .whereSimple(dailyRequest, zipCode.toString(), date.toString())
                 .parseList { DayForecast(HashMap(it)) }
 
-        val cityForecast = select(CityForecastTable.NAME)
+        val city = select(CityForecastTable.NAME)
                 .whereSimple("${CityForecastTable.ID} = ?", zipCode.toString())
                 .parseOpt { CityForecast(HashMap(it), dailyForecast) }
 
-        if (cityForecast != null) dataMapper.convertToDomain(cityForecast) else null
+        city?.let { dataMapper.convertToDomain(it) }
     }
 
     /**
-     * 插入到db
+     * 查询一天
      */
+    override fun requestDayForecast(id: Long) = forecastDbHelper.use {
+        val forecast = select(DayForecastTable.NAME)
+                .whereSimple("${DayForecastTable.ID} = ?", id.toString())
+                .parseOpt { DayForecast(HashMap(it)) }
+
+        forecast?.let { dataMapper.convertDayToDomain(it) }
+    }
+
     fun saveForecast(forecast: ForecastList) = forecastDbHelper.use {
+
         clear(CityForecastTable.NAME)
         clear(DayForecastTable.NAME)
 
         with(dataMapper.convertFromDomain(forecast)) {
-            //在toVarargArray函数结果前面使用*表示这个array会被分解成为一个vararg参数
             insert(CityForecastTable.NAME, *map.toVarargArray())
-            dailyForecast.forEach {
-                insert(DayForecastTable.NAME, *it.map.toVarargArray())
-            }
+            dailyForecast.forEach { insert(DayForecastTable.NAME, *it.map.toVarargArray()) }
         }
     }
 }

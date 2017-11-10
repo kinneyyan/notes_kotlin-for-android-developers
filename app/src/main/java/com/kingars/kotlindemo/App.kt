@@ -1,7 +1,7 @@
 package com.kingars.kotlindemo
 
 import android.app.Application
-import kotlin.properties.Delegates
+import com.kingars.kotlindemo.extentions.DelegatesExt
 
 /**
  * author: YanShi

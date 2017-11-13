@@ -8,5 +8,5 @@ class RequestDayForecastCommand(
         private val forecastProvider: ForecastProvider = ForecastProvider()) :
         Command<Forecast> {
 
-    override fun execute() = forecastProvider.requestForecast(id)
+    override fun execute(): Forecast = forecastProvider.requestForecast(id)
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,32 +19,47 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_forecast.view.*
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.find
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.uiThread
 
 /**
  * 这里使用kotlin-android-extensions的特性，直接通过编译器生成的类获取xml中定义的view
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ToolbarManager {
+
+    //使用lazy委托，只有在第一次使用它时才会inflate
+    override val toolbar by lazy { find<Toolbar>(R.id.toolbar) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //初始化Toolbar
+        initToolbar()
+        //给Toolbar添加滑动监听
+        attachToScroll(forecastListRv)
 
         forecastListRv.layoutManager = LinearLayoutManager(this)
         forecastListRv.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-        requestBtn.setOnClickListener {
-            progressBar.visibility = View.VISIBLE
-            //在其他线程执行
-            doAsync {
-                val result = RequestForecastCommand(94043, ForecastProvider()).execute()
-                //如果调用者activity已被销毁，则uiThread内不会执行
-                uiThread {
-                    //如果这个函数只接收一个参数，那我们可以使用it引用，而不用去指定左边的参数
-                    //forecastList.adapter = ForecastListAdapter(result, { forecast -> toast(forecast.date) })
-                    forecastListRv.adapter = ForecastListAdapter(result, { toast(it.date.toString()) })
-                    progressBar.visibility = View.GONE
-                }
+
+        progressBar.visibility = View.VISIBLE
+        //在其他线程执行
+        doAsync {
+            val result: ForecastList = RequestForecastCommand(94043, ForecastProvider()).execute()
+            //如果调用者activity已被销毁，则uiThread内不会执行
+            uiThread {
+                //设置标题
+                toolbarTitle = "${result.city}(${result.country})"
+
+                //如果这个函数只接收一个参数，那我们可以使用it引用，而不用去指定左边的参数
+                //forecastList.adapter = ForecastListAdapter(result, { forecast -> toast(forecast.date) })
+                forecastListRv.adapter = ForecastListAdapter(result, {
+                    //调用anko的扩展函数
+                    startActivity<DetailActivity>(
+                            DetailActivity.ID to it.id,
+                            DetailActivity.CITY_NAME to result.city)
+                })
+                progressBar.visibility = View.GONE
             }
         }
     }

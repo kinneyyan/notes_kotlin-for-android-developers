@@ -37,9 +37,10 @@ class ForecastDb(
      */
     override fun requestDayForecast(id: Long) = forecastDbHelper.use {
         val forecast = select(DayForecastTable.NAME)
-                .whereSimple("${DayForecastTable.ID} = ?", id.toString())
+                .byId(id)
                 .parseOpt { DayForecast(HashMap(it)) }
 
+        //let函数只会在forecast不为null的时候执行，否则返回null
         forecast?.let { dataMapper.convertDayToDomain(it) }
     }
 
@@ -54,6 +55,9 @@ class ForecastDb(
         }
     }
 }
+
+fun SelectQueryBuilder.byId(id: Long): SelectQueryBuilder
+        = whereSimple("_id = ?", id.toString())
 
 //扩展函数
 //把map转换成一个vararg数组。

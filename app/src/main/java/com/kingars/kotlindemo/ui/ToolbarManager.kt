@@ -7,6 +7,7 @@ import com.kingars.kotlindemo.App
 import com.kingars.kotlindemo.R
 import com.kingars.kotlindemo.extentions.slideEnter
 import com.kingars.kotlindemo.extentions.slideExit
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 /**
@@ -33,8 +34,7 @@ interface ToolbarManager {
         toolbar.inflateMenu(R.menu.menu_main)
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
-//                R.id.action_settings -> toolbar.context.startActivity<SettingsActivity>()
-                R.id.action_settings -> App.instance.toast("settings")
+                R.id.action_settings -> toolbar.context.startActivity<SettingsActivity>()
                 else -> App.instance.toast("Unknown option")
             }
             true

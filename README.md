@@ -23,9 +23,11 @@
     
     [9.Kotlin中的null安全](https://github.com/kinneyyan/notes_kotlin-for-android-developers/blob/master/notes/9.Kotlin中的null安全.md)
     
-    [10.Flow control和ranges](https://github.com/kinneyyan/notes_kotlin-for-android-developers/blob/master/notes/10.Flow control和ranges.md)
+    [10.Flow control和ranges](https://github.com/kinneyyan/notes_kotlin-for-android-developers/blob/master/notes/10.Flow%20control%E5%92%8Cranges.md)
 
     [11.泛型](https://github.com/kinneyyan/notes_kotlin-for-android-developers/blob/master/notes/11.泛型.md)
+
+    [12.内部类、枚举、密封类、异常](https://github.com/kinneyyan/notes_kotlin-for-android-developers/blob/master/notes/12.内部类、枚举、密封类、异常.md)
 
     [Kotlin in Android](https://github.com/kinneyyan/notes_kotlin-for-android-developers/blob/master/notes/Kotlin%20in%20Android.md)
 
